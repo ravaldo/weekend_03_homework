@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<form class="book-form" action="/books" method="post">
+		<h3>Add a book . . .</h3>
+		<label for="title">Title</label>
+		<input type="text" name="title" id="title">
+		<label for="author">Author</label>
+		<input type="text" name="author" id="author">
+		<label for="genre">Genre(s)</label>
+		<input type="text" name="genre" id="genre">
+		<label for="numpages">Number&nbsp;of&nbsp;pages</label>
+		<input type="number" name="numpages" id="numpages">
+		<input type="submit" value="Add book">
+	</form>
+
+	<div class="book-list">
+	{% for b in books %}
+		<a href="/books/{{ loop.index0 }}">     {# books.index(b) #}
+			<div class="book">
+				<section>
+				<span class="title">{{b.title}}</span></br>by {{b.author}}
+				</section>
+			</div>
+		</a>
+	{% endfor %}
+	</div>
+
+{% endblock %}

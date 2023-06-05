@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<div class="detail">
+		<div class="book">
+			<img></img>
+			<h2>{{book.title}}</h2>
+			<p>by {{book.author}}</p>
+			<p>Genres: {{ book.genre|join(", ") }}</p>
+			<p>Pages: {{book.numpages}}</p>
+			<p>Status: 
+				{%- if book.is_available() -%}
+				<span class="available">On the shelf</span>
+				{%- else -%}
+				<span class="unavailable">On loan</span>
+				{%- endif -%}
+			</p>
+		</div>
+		
+		<div class="book-admin">
+			<fieldset>
+				<legend>Options</legend>
+				<form method="post">
+					<input type="radio" id="available" name="book-admin" value="checked_in" 
+						{% if book.is_available() -%}
+						checked
+						{%- endif %}>
+					<label for="available">Checked In</label><br>
+					<input type="radio" id="unavailable" name="book-admin" value="checked_out" 
+						{% if not book.is_available() -%}
+						checked
+						{%- endif %}>
+					<label for="unavailable">Checked Out</label><br>
+					<input type="radio" id="delete" name="book-admin" value="delete">
+					<label for="delete">Delete</label><br>
+					<input type="submit" value="Submit">
+				</form>
+			</fieldset>
+		</div>
+		
+	</div>
+
+{% endblock %}
+
+
+
+
+
+
